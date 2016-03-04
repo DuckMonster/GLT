@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="GLT.h" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Texture.hpp" />
     <ClInclude Include="VAO.hpp" />
     <ClInclude Include="VBO.hpp" />
   </ItemGroup>
