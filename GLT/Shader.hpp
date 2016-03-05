@@ -8,6 +8,9 @@ namespace glt {
 		static std::string ReadFile(const char* filename);
 
 		Shader(const char*, const char*);
+		~Shader() { dispose(); }
+
+		void dispose() { glDeleteProgram(program); }
 
 		void use();
 		GLuint getUniform(const char*);
@@ -15,7 +18,7 @@ namespace glt {
 		operator GLuint() const { return program; }
 
 	private:
-		GLuint program, vertex, fragment;
+		GLuint program;
 
 		void init(const char*, const char*);
 		GLuint createShader(GLenum, const char*);

@@ -1,11 +1,15 @@
 #pragma once
 #include <vector>
+#include <iostream>
 #include <GL\glew.h>
 
 namespace glt {
 	class VBO {
 	public:
 		VBO() { init(); }
+		~VBO() { dispose(); }
+
+		void dispose() { glDeleteVertexArrays(1, &handle); }
 
 		void bind();
 		void setData(std::vector<float>);

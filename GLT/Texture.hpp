@@ -7,6 +7,9 @@ namespace glt {
 	public:
 		Texture() {};
 		Texture(char* source) { load(source); }
+		//~Texture() { dispose(); }
+
+		void dispose() { glDeleteTextures(1, &handle); }
 
 		void bind() { glBindTexture(GL_TEXTURE_2D, handle); }
 		void load(char* source) {

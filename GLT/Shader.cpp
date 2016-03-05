@@ -30,8 +30,8 @@ Shader::Shader(const char* vertexSrc, const char* fragmentSrc) {
 void Shader::init(const char* vertexSrc, const char* fragmentSrc) {
 	//Init
 	program = glCreateProgram();
-	vertex = createShader(GL_VERTEX_SHADER, vertexSrc);
-	fragment = createShader(GL_FRAGMENT_SHADER, fragmentSrc);
+	GLuint vertex = createShader(GL_VERTEX_SHADER, vertexSrc);
+	GLuint fragment = createShader(GL_FRAGMENT_SHADER, fragmentSrc);
 
 	//Link program
 	glAttachShader(program, vertex);

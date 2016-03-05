@@ -1,14 +1,19 @@
 #pragma once
 #include <GL\glew.h>
+#include <iostream>
 #include "VBO.hpp"
 
 namespace glt {
 	class VAO {
 	public:
 		VAO() { init(); }
+		~VAO() { dispose(); }
+
+		void dispose() { glDeleteBuffers(1, &handle); }
+
 		void bind() { glBindVertexArray(handle); }
 
-		void bindBufferToAttr(VBO vbo, GLuint attribute);
+		void bindBufferToAttr(VBO& vbo, GLuint attribute);
 		void bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute);
 
 		operator GLuint() const { return handle; }

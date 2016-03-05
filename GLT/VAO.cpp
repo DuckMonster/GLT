@@ -3,7 +3,7 @@
 
 using namespace glt;
 
-void VAO::bindBufferToAttr(VBO vbo, GLuint attribute) {
+void VAO::bindBufferToAttr(VBO& vbo, GLuint attribute) {
 	bind();
 
 	glEnableVertexAttribArray(attribute);
