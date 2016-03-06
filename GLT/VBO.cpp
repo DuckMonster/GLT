@@ -1,7 +1,11 @@
 #include "VBO.hpp"
 using namespace glt;
 
-void VBO::init() {
+void VBO::init(size_t size) {
+	if (handle != -1)
+		return;
+
+	setSize(size);
 	glGenBuffers(1, &handle);
 }
 

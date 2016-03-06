@@ -6,8 +6,11 @@
 namespace glt {
 	class VBO {
 	public:
-		VBO() { init(); }
+		VBO() { }
+		VBO(size_t size) { init(size); }
 		~VBO() { dispose(); }
+
+		void init(size_t);
 
 		void dispose() { glDeleteVertexArrays(1, &handle); }
 
@@ -23,9 +26,7 @@ namespace glt {
 		operator GLuint() const { return getHandle(); }
 
 	private:
-		GLuint handle;
+		GLuint handle = -1;
 		size_t size = 3;
-
-		void init();
 	};
 }

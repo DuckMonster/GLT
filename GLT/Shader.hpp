@@ -7,6 +7,7 @@ namespace glt {
 	public:
 		static std::string ReadFile(const char* filename);
 
+		Shader() {};
 		Shader(const char*, const char*);
 		~Shader() { dispose(); }
 
