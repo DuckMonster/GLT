@@ -12,8 +12,7 @@ namespace glt {
 	public:
 		glm::vec3 position;
 		glm::vec3 scale;
-		float rotation = 0.f;
-		glm::vec3 rotationVec;
+		glm::vec3 rotation;
 
 		Mesh() { };
 		Mesh(Shader& shader);
@@ -21,9 +20,9 @@ namespace glt {
 		void init();
 
 		void setShader(Shader& shader);
-		void setVertices(void*, int);
-		void setUVS(void*, int);
-		void setColors(void*, int);
+		void setVertices(float*, int);
+		void setUVS(float*, int);
+		void setColors(float*, int);
 
 		void reset();
 
@@ -38,6 +37,7 @@ namespace glt {
 
 		VAO vao;
 		VBO vbo_vertices, vbo_colors, vbo_uvs;
+		std::size_t vertex_size;
 
 		void bindBuffers();
 		void updateUniforms();

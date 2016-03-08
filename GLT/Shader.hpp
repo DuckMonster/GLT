@@ -15,6 +15,7 @@ namespace glt {
 
 		void use();
 		GLuint getUniform(const char*);
+		GLuint getAttrib(const char*);
 
 		operator GLuint() const { return program; }
 

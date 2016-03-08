@@ -16,7 +16,8 @@ namespace glt {
 
 		void bind();
 		void setData(std::vector<float>);
-		void setData(void*, unsigned int);
+		void setData(float*, size_t);
+		void fillData(float, size_t);
 
 		void setSize(size_t size) { this->size = size; }
 		size_t getSize() { return size; }
@@ -28,5 +29,7 @@ namespace glt {
 	private:
 		GLuint handle = -1;
 		size_t size = 3;
+
+		std::vector<float> data;
 	};
 }

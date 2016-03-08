@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "Mesh.h"
+#include "Mesh.hpp"
 
 using namespace glt;
 using namespace glm;
@@ -19,13 +19,23 @@ Mesh::Mesh(Shader& shader) {
 
 //Transformations
 mat4 Mesh::getModelMatrix() {
-	float sinx = sin(glm::radians(rotation));
-	float cosx = cos(glm::radians(rotation));
+	float a = cos(radians(rotation.x));
+	float b = sin(radians(rotation.x));
+
+	float x = cos(radians(rotation.y));
+	float y = sin(radians(rotation.y));
+
+	float u = cos(radians(rotation.z));
+	float v = sin(radians(rotation.z));
+
+	float i = scale.x;
+	float j = scale.y;
+	float k = scale.z;
 
 	glm::mat4 model = glm::mat4(
-		cosx * scale.x, -sinx * scale.y, 0, position.x,
-		sinx * scale.x, cosx * scale.y, 0, position.y,
-		0, 0, scale.z, position.z,
+		i*u*x, -a*j*v + b*j*u*y, -b*k*v - a*x*u*y, position.x,
+		i*v*x, a*j*u + b*j*v*y, b*k*u - a*k*v*y, position.y,
+		i*y, -b*j*x, a*k*x, position.z,
 		0, 0, 0, 1
 		);
 
@@ -33,9 +43,9 @@ mat4 Mesh::getModelMatrix() {
 }
 
 void Mesh::reset() {
-	rotation = 0.f;
-	scale = vec3(1.f);
 	position = vec3(0.f);
+	scale = vec3(1.f);
+	rotation = vec3(0.f);
 }
 //----
 
@@ -56,16 +66,19 @@ void Mesh::setShader(Shader& shader) {
 	bindBuffers();
 }
 
-void Mesh::setVertices(void* vertices, int size) {
+void Mesh::setVertices(float* vertices, int size) {
 	vbo_vertices.setData(vertices, size);
+	vertex_size = size / sizeof(float);
 }
 
-void Mesh::setUVS(void* uvs, int size) {
+void Mesh::setUVS(float* uvs, int size) {
 	vbo_uvs.setData(uvs, size);
+	vertex_size = size / sizeof(float);
 }
 
-void Mesh::setColors(void* colors, int size) {
+void Mesh::setColors(float* colors, int size) {
 	vbo_colors.setData(colors, size);
+	vertex_size = size / sizeof(float);
 }
 
 void Mesh::updateUniforms() {
@@ -77,5 +90,5 @@ void Mesh::draw() {
 	updateUniforms();
 
 	vao.bind();
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, vertex_size);
 }
