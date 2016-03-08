@@ -37,9 +37,11 @@ namespace glt {
 
 		VAO vao;
 		VBO vbo_vertices, vbo_colors, vbo_uvs;
-		std::size_t vertex_size;
+		std::size_t vertex_count;
 
 		void bindBuffers();
 		void updateUniforms();
+
+		void fillVertices(size_t);
 	};
 }

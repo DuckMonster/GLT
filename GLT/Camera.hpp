@@ -20,8 +20,7 @@ namespace glt {
 		float far = 100.f;
 		float aspectRatio = 800.f / 600.f;
 
-		bool isPerspective = true;
-		bool useLookAt = true;
+		bool perspective = true;
 
 	private:
 		mat4 matrix;

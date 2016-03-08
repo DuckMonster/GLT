@@ -68,17 +68,23 @@ void Mesh::setShader(Shader& shader) {
 
 void Mesh::setVertices(float* vertices, int size) {
 	vbo_vertices.setData(vertices, size);
-	vertex_size = size / sizeof(float);
+	vertex_count = size / sizeof(float);
 }
 
 void Mesh::setUVS(float* uvs, int size) {
 	vbo_uvs.setData(uvs, size);
-	vertex_size = size / sizeof(float);
+	vertex_count = size / sizeof(float);
 }
 
 void Mesh::setColors(float* colors, int size) {
 	vbo_colors.setData(colors, size);
-	vertex_size = size / sizeof(float);
+	vertex_count = size / sizeof(float);
+}
+
+void Mesh::fillVertices(size_t count) {
+	vbo_vertices.setVertexCount(count, 0.f);
+	vbo_colors.setVertexCount(count, 1.0f);
+	vbo_uvs.setVertexCount(count, 1.f);
 }
 
 void Mesh::updateUniforms() {
@@ -90,5 +96,6 @@ void Mesh::draw() {
 	updateUniforms();
 
 	vao.bind();
-	glDrawArrays(GL_TRIANGLES, 0, vertex_size);
+	fillVertices(vertex_count);
+	glDrawArrays(GL_TRIANGLES, 0, vertex_count);
 }

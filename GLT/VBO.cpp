@@ -5,7 +5,7 @@ void VBO::init(size_t size) {
 	if (handle != -1)
 		return;
 
-	setSize(size);
+	setVertexSize(size);
 	glGenBuffers(1, &handle);
 }
 
@@ -30,12 +30,17 @@ void VBO::setData(float* data, size_t size) {
 	this->data.assign(data, data + size / sizeof(float));
 }
 
-void VBO::fillData(float data, size_t count) {
-	float* dataArr = new float[count];
-	for (size_t i = 0; i < count; i++)
-		dataArr[i] = data;
+void VBO::setVertexCount(size_t count, float defValue) {
+	if (count == data.size())
+		return;
 
-	glBufferData(GL_ARRAY_BUFFER, count, dataArr, sizeof(float) * count);
+	if (count > data.size()) {
+		for (size_t i = data.size(); i < count; i++)
+			data.push_back(defValue);
 
-	delete[] dataArr;
+		setData(data);
+	}
+	else {
+		setData(&data[0], count * sizeof(float));
+	}
 }
