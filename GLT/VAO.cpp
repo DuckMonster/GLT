@@ -9,7 +9,7 @@ void VAO::bindBufferToAttr(VBO& vbo, GLuint attribute) {
 	glEnableVertexAttribArray(attribute);
 
 	vbo.bind();
-	glVertexAttribPointer(attribute, vbo.getVertexSize(), GL_FLOAT, false, 0, 0);
+	glVertexAttribPointer(attribute, vbo.getDataSize(), GL_FLOAT, false, 0, 0);
 }
 
 void VAO::bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute) {

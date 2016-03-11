@@ -11,6 +11,9 @@ namespace glt {
 
 		void dispose() { glDeleteTextures(1, &handle); }
 
+		int getWidth() { return width; }
+		int getHeight() { return height; }
+
 		void bind() { glBindTexture(GL_TEXTURE_2D, handle); }
 		void load(char* source) {
 			//Load image

@@ -5,7 +5,7 @@ void VBO::init(size_t size) {
 	if (handle != -1)
 		return;
 
-	setVertexSize(size);
+	setDataSize(size);
 	glGenBuffers(1, &handle);
 }
 
@@ -31,6 +31,8 @@ void VBO::setData(float* data, size_t size) {
 }
 
 void VBO::setVertexCount(size_t count, float defValue) {
+	count *= dataSize;
+
 	if (count == data.size())
 		return;
 
@@ -43,4 +45,8 @@ void VBO::setVertexCount(size_t count, float defValue) {
 	else {
 		setData(&data[0], count * sizeof(float));
 	}
+}
+
+size_t VBO::getVertexCount() {
+	return data.size() / dataSize;
 }

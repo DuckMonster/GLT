@@ -1,6 +1,6 @@
 #pragma once
-#include <glm\matrix.hpp>
-#include <glm\vec3.hpp>
+#include <glm\glm.hpp>
+#include "Ray.hpp"
 
 using namespace glm;
 
@@ -18,9 +18,16 @@ namespace glt {
 		float fieldOfView = 0.45f;
 		float near = 0.1f;
 		float far = 100.f;
-		float aspectRatio = 800.f / 600.f;
 
 		bool perspective = true;
+		vec2 screenSize = vec2(800.f, 600.f);
+
+		Camera(vec2 screenSize) { this->screenSize = screenSize; }
+
+		Ray screenToWorld(int x, int y) { return screenToWorld(vec2(x, y)); }
+		Ray screenToWorld(vec2 screen);
+		vec2 worldToScreen(vec3 world);
+		float getAspectRatio() { return screenSize.x / screenSize.y; }
 
 	private:
 		mat4 matrix;

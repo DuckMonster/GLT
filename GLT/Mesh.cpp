@@ -19,26 +19,48 @@ Mesh::Mesh(Shader& shader) {
 
 //Transformations
 mat4 Mesh::getModelMatrix() {
-	float a = cos(radians(rotation.x));
-	float b = sin(radians(rotation.x));
+	//Rotation matrices
+	float xc = cos(radians(rotation.x));
+	float xs = sin(radians(rotation.x));
 
-	float x = cos(radians(rotation.y));
-	float y = sin(radians(rotation.y));
+	float yc = cos(radians(rotation.y));
+	float ys = sin(radians(rotation.y));
 
-	float u = cos(radians(rotation.z));
-	float v = sin(radians(rotation.z));
+	float zc = cos(radians(rotation.z));
+	float zs = sin(radians(rotation.z));
 
-	float i = scale.x;
-	float j = scale.y;
-	float k = scale.z;
+	mat4
+		rotx(
+			1, 0, 0, 0,
+			0, xc, xs, 0,
+			0, -xs, xc, 0,
+			0, 0, 0, 1),
 
-	glm::mat4 model = glm::mat4(
-		i*u*x, -a*j*v + b*j*u*y, -b*k*v - a*x*u*y, position.x,
-		i*v*x, a*j*u + b*j*v*y, b*k*u - a*k*v*y, position.y,
-		i*y, -b*j*x, a*k*x, position.z,
-		0, 0, 0, 1
-		);
+		roty(
+			yc, 0, -ys, 0,
+			0, 1, 0, 0,
+			ys, 0, yc, 0,
+			0, 0, 0, 1),
 
+		rotz(
+			zc, -zs, 0, 0,
+			zs, zc, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1);
+
+	mat4 translation(
+		1, 0, 0, position.x,
+		0, 1, 0, position.y,
+		0, 0, 1, position.z,
+		0, 0, 0, 1);
+
+	mat4 scale(
+		scale.x, 0, 0, 0,
+		0, scale.y, 0, 0,
+		0, 0, scale.z, 0,
+		0, 0, 0, 1);
+
+	mat4 model = scale * rotz * rotx * roty * translation;
 	return transpose(model);
 }
 
@@ -56,6 +78,8 @@ void Mesh::init() {
 }
 
 void Mesh::bindBuffers() {
+	init();
+
 	vao.bindBufferToAttr(vbo_vertices, glGetAttribLocation(*shader, "v_position"));
 	vao.bindBufferToAttr(vbo_uvs, glGetAttribLocation(*shader, "v_uv"));
 	vao.bindBufferToAttr(vbo_colors, glGetAttribLocation(*shader, "v_color"));
@@ -68,17 +92,17 @@ void Mesh::setShader(Shader& shader) {
 
 void Mesh::setVertices(float* vertices, int size) {
 	vbo_vertices.setData(vertices, size);
-	vertex_count = size / sizeof(float);
+	vertex_count = vbo_vertices.getVertexCount();
 }
 
 void Mesh::setUVS(float* uvs, int size) {
 	vbo_uvs.setData(uvs, size);
-	vertex_count = size / sizeof(float);
+	vertex_count = vbo_vertices.getVertexCount();
 }
 
 void Mesh::setColors(float* colors, int size) {
 	vbo_colors.setData(colors, size);
-	vertex_count = size / sizeof(float);
+	vertex_count = vbo_vertices.getVertexCount();
 }
 
 void Mesh::fillVertices(size_t count) {
@@ -89,6 +113,10 @@ void Mesh::fillVertices(size_t count) {
 
 void Mesh::updateUniforms() {
 	glUniformMatrix4fv(shader->getUniform("u_model"), 1, false, glm::value_ptr(getModelMatrix()));
+	glUniform1i(shader->getUniform("u_usingTexture"), texture != nullptr ? 1 : 0);
+
+	if (texture != nullptr)
+		texture->bind();
 }
 
 void Mesh::draw() {

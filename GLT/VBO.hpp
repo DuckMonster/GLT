@@ -17,10 +17,12 @@ namespace glt {
 		void bind();
 		void setData(std::vector<float>);
 		void setData(float*, size_t);
-		void setVertexCount(size_t, float);
 
-		void setVertexSize(size_t size) { this->vertexSize = size; }
-		size_t getVertexSize() { return vertexSize; }
+		void setDataSize(size_t size) { this->dataSize = size; }
+		size_t getDataSize() { return dataSize; }
+
+		void setVertexCount(size_t, float);
+		size_t getVertexCount();
 
 		GLuint getHandle() const { return handle; }
 
@@ -28,7 +30,7 @@ namespace glt {
 
 	private:
 		GLuint handle = -1;
-		size_t vertexSize = 3;
+		size_t dataSize = 3;
 
 		std::vector<float> data;
 	};

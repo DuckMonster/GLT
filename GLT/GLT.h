@@ -1,6 +1,5 @@
 #pragma once
-#include "Shader.hpp"
-#include "VBO.hpp"
+#include <GL\glew.h>
 
 namespace glt {
 	void gltInit() {

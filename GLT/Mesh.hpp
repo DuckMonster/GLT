@@ -6,6 +6,7 @@
 #include "VAO.hpp"
 #include "VBO.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 
 namespace glt {
 	class Mesh {
@@ -13,6 +14,8 @@ namespace glt {
 		glm::vec3 position;
 		glm::vec3 scale;
 		glm::vec3 rotation;
+
+		Texture* texture = nullptr;
 
 		Mesh() { };
 		Mesh(Shader& shader);
