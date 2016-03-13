@@ -17,12 +17,12 @@ namespace glt {
 
 		Texture* texture = nullptr;
 
-		Mesh() { };
-		Mesh(Shader& shader);
+		Mesh() { reset(); };
+		Mesh(Shader* shader);
 
 		void init();
 
-		void setShader(Shader& shader);
+		void setShader(Shader* shader);
 		void setVertices(float*, int);
 		void setUVS(float*, int);
 		void setColors(float*, int);

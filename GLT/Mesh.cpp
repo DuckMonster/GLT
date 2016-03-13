@@ -5,12 +5,13 @@
 #include <iomanip>
 
 #include "Mesh.hpp"
+#include "Camera.hpp"
 
 using namespace glt;
 using namespace glm;
 using namespace std;
 
-Mesh::Mesh(Shader& shader) {
+Mesh::Mesh(Shader* shader) {
 	init();
 	setShader(shader);
 
@@ -85,8 +86,11 @@ void Mesh::bindBuffers() {
 	vao.bindBufferToAttr(vbo_colors, glGetAttribLocation(*shader, "v_color"));
 }
 
-void Mesh::setShader(Shader& shader) {
-	this->shader = &shader;
+void Mesh::setShader(Shader* shader) {
+	if (shader == nullptr)
+		return;
+
+	this->shader = shader;
 	bindBuffers();
 }
 
@@ -121,6 +125,8 @@ void Mesh::updateUniforms() {
 
 void Mesh::draw() {
 	shader->use();
+	Camera::active->updateShader(*shader, "u_camera");
+
 	updateUniforms();
 
 	vao.bind();

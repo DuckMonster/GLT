@@ -1,6 +1,17 @@
 #include "Camera.hpp"
 #include <glm\gtc\matrix_transform.hpp>
+#include <glm\gtc\type_ptr.hpp>
+
 using namespace glt;
+
+Camera* Camera::active = nullptr;
+
+Camera::Camera(vec2 screenSize) {
+	if (active == nullptr)
+		setActive();
+
+	this->screenSize = screenSize;
+}
 
 mat4 Camera::getMatrix() {
 	mat4 projection = glm::perspective(fieldOfView, getAspectRatio(), near, far);
@@ -29,4 +40,12 @@ Ray Camera::screenToWorld(vec2 screen) {
 
 vec2 Camera::worldToScreen(vec3 world) {
 	return vec2(getMatrix() * vec4(world, 1.0));
+}
+
+void Camera::setActive() {
+	Camera::active = this;
+}
+
+void Camera::updateShader(GLuint program, const char* vpName) {
+	glUniformMatrix4fv(glGetUniformLocation(program, vpName), 1, false, value_ptr(getMatrix()));
 }
