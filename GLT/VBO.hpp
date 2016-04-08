@@ -6,17 +6,21 @@
 namespace glt {
 	class VBO {
 	public:
+		GLenum dataUsage = GL_STATIC_DRAW;
+
 		VBO() { }
 		VBO(size_t size) { init(size); }
 		~VBO() { dispose(); }
 
 		void init(size_t);
 
-		void dispose() { glDeleteVertexArrays(1, &handle); }
+		void dispose() { glDeleteBuffers(1, &handle); }
 
 		void bind();
-		void setData(std::vector<float>);
-		void setData(float*, size_t);
+		void setData(const std::vector<float>);
+		void setData(const float*, size_t);
+
+		const std::vector<float> getData();
 
 		void setDataSize(size_t size) { this->dataSize = size; }
 		size_t getDataSize() { return dataSize; }

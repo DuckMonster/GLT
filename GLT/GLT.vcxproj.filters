@@ -36,7 +36,13 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="Stencil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +74,13 @@
     <ClInclude Include="Ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.hpp">
+    <ClInclude Include="Stencil.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshDrawer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

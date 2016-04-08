@@ -11,40 +11,32 @@
 namespace glt {
 	class Mesh {
 	public:
-		glm::vec3 position;
-		glm::vec3 scale;
-		glm::vec3 rotation;
-
+		GLuint drawMode = GL_TRIANGLES;
 		Texture* texture = nullptr;
 
-		Mesh() { reset(); };
-		Mesh(Shader* shader);
+		Mesh();
 
-		void init();
+		void setVertices(const float*, int);
+		void setUVS(const float*, int);
+		void setColors(const float*, int);
 
-		void setShader(Shader* shader);
-		void setVertices(float*, int);
-		void setUVS(float*, int);
-		void setColors(float*, int);
+		VAO* getVAO() { return &vao; }
+		VBO* getVertexVBO() { return &vbo_vertices; }
+		VBO* getColorVBO() { return &vbo_colors; }
+		VBO* getUvVBO() { return &vbo_uvs; }
 
-		void reset();
-
-		glm::mat4 getModelMatrix();
+		void setDataUsage(GLenum usage);
 
 		void draw();
 
 	private:
-		std::vector<glm::vec3> vertices;
-
-		Shader* shader;
-
 		VAO vao;
 		VBO vbo_vertices, vbo_colors, vbo_uvs;
 		std::size_t vertex_count;
 
-		void bindBuffers();
-		void updateUniforms();
+		//-----------
 
+		void init();
 		void fillVertices(size_t);
 	};
 }

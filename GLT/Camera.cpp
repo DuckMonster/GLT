@@ -1,6 +1,7 @@
 #include "Camera.hpp"
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
+#include <iostream>
 
 using namespace glt;
 
@@ -13,16 +14,45 @@ Camera::Camera(vec2 screenSize) {
 	this->screenSize = screenSize;
 }
 
+void Camera::checkDirty() {
+	if (position_old != position ||
+		direction_old != direction ||
+		fov_old != fieldOfView ||
+		near_old != near ||
+		far_old != far ||
+		perspective_old != perspective ||
+		screenSize_old != screenSize) {
+		isDirty = true;
+	}
+}
+
+void Camera::clean() {
+	position_old = position;
+	direction_old = direction;
+
+	fov_old = fieldOfView;
+	near_old = near;
+	far_old = far;
+
+	perspective_old = perspective;
+	screenSize_old = screenSize;
+
+	isDirty = false;
+}
+
 mat4 Camera::getMatrix() {
+	checkDirty();
+
+	if (!isDirty)
+		return cameraMatrix;
+
+	clean();
+
 	mat4 projection = glm::perspective(fieldOfView, getAspectRatio(), near, far);
+	mat4 view = glm::lookAt(position, position + direction, vec3(0.f, 1.f, 0.f));
 
-	mat4 view(1.0f);
-	view = rotate(view, radians(rotation.z), vec3(0, 0, 1));
-	view = rotate(view, radians(rotation.x), vec3(1, 0, 0));
-	view = rotate(view, radians(rotation.y), vec3(0, 1, 0));
-	view = translate(view, -position);
-
-	return projection * view;
+	cameraMatrix = projection * view;
+	return cameraMatrix;
 }
 
 Ray Camera::screenToWorld(vec2 screen) {

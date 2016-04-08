@@ -9,11 +9,11 @@ namespace glt {
 		VAO() { init(); }
 		~VAO() { dispose(); }
 
-		void dispose() { glDeleteBuffers(1, &handle); }
+		void dispose() { glDeleteVertexArrays(1, &handle); }
 
 		void bind() { glBindVertexArray(handle); }
 
-		void bindBufferToAttr(VBO& vbo, GLuint attribute);
+		void bindBufferToAttr(VBO* vbo, GLuint attribute);
 		void bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute);
 
 		operator GLuint() const { return handle; }

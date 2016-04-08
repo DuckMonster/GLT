@@ -13,10 +13,7 @@ namespace glt {
 		mat4 getMatrix();
 		
 		vec3 position = vec3(0.f, 0.f, 1.f);
-		vec3 target = vec3(0.f);
-		vec3 up = vec3(0.f, 1.f, 0.f);
-
-		vec3 rotation = vec3(0.f);
+		vec3 direction = vec3(0.f, 0.f, -1.f);
 
 		float fieldOfView = 0.45f;
 		float near = 0.1f;
@@ -36,6 +33,23 @@ namespace glt {
 		void updateShader(GLuint, const char*);
 
 	private:
-		mat4 matrix;
+		mat4 cameraMatrix;
+
+		//Dirtyness for matrix calculation
+		bool isDirty;
+
+		vec3 position_old;
+		vec3 direction_old;
+
+		float fov_old;
+		float near_old;
+		float far_old;
+
+		bool perspective_old;
+		vec2 screenSize_old;
+		//---
+
+		void checkDirty();
+		void clean();
 	};
 }

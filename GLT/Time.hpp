@@ -6,7 +6,7 @@ namespace glt {
 	class Time {
 	public:
 		static void init();
-		static double getDelta();
+		static double delta();
 		static double total();
 
 	private:

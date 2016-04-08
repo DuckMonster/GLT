@@ -3,13 +3,13 @@
 
 using namespace glt;
 
-void VAO::bindBufferToAttr(VBO& vbo, GLuint attribute) {
+void VAO::bindBufferToAttr(VBO* vbo, GLuint attribute) {
 	bind();
 
 	glEnableVertexAttribArray(attribute);
 
-	vbo.bind();
-	glVertexAttribPointer(attribute, vbo.getDataSize(), GL_FLOAT, false, 0, 0);
+	vbo->bind();
+	glVertexAttribPointer(attribute, vbo->getDataSize(), GL_FLOAT, false, 0, 0);
 }
 
 void VAO::bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute) {

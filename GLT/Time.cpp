@@ -10,7 +10,7 @@ void Time::init() {
 	initialized = true;
 }
 
-double Time::getDelta() {
+double Time::delta() {
 	if (!initialized)
 		init();
 
