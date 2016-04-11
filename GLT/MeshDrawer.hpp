@@ -15,7 +15,11 @@ namespace glt {
 		//Color
 		glm::vec4 color = glm::vec4(1.f);
 
+		//Texture
+		Texture* texture = nullptr;
+
 		//---------
+
 		MeshDrawer();
 		MeshDrawer(MeshDrawer* copy);
 		MeshDrawer(Mesh* mesh);

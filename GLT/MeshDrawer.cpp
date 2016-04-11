@@ -7,7 +7,7 @@ using namespace glm;
 using namespace glt;
 
 #pragma region
-const char* SRC_VERTEX =
+const char* MESH_SRC_VERTEX =
 "#version 450\n"
 "in vec3 v_position;"
 "in vec4 v_color;"
@@ -25,7 +25,7 @@ const char* SRC_VERTEX =
 "	f_uv = v_uv;"
 "}";
 
-const char* SRC_FRAGMENT =
+const char* MESH_SRC_FRAGMENT =
 "#version 450\n"
 "uniform sampler2D u_texture;"
 "uniform bool u_usingTexture;"
@@ -53,7 +53,7 @@ void MeshDrawer::compileDefaultShader() {
 	if (MeshDrawer::DEFAULT_SHADER != nullptr)
 		return;
 
-	MeshDrawer::DEFAULT_SHADER = new Shader(SRC_VERTEX, SRC_FRAGMENT);
+	MeshDrawer::DEFAULT_SHADER = new Shader(MESH_SRC_VERTEX, MESH_SRC_FRAGMENT);
 }
 
 MeshDrawer::MeshDrawer() {
@@ -186,7 +186,9 @@ void MeshDrawer::updateUniforms() {
 	glUniformMatrix4fv(shader->getUniform("u_model"), 1, false, glm::value_ptr(modelMatrix));
 
 	//Texture
-	glUniform1i(shader->getUniform("u_usingTexture"), mesh->texture == nullptr ? 0 : 1);
+	glUniform1i(shader->getUniform("u_usingTexture"), texture == nullptr ? 0 : 1);
+	if (texture != nullptr)
+		texture->bind();
 
 	//Color
 	glUniform4fv(shader->getUniform("u_blendColor"), 1, glm::value_ptr(color));
@@ -196,9 +198,9 @@ void MeshDrawer::draw() {
 	if (mesh == nullptr)
 		return;
 
-	Camera::active->updateShader(*shader, "u_camera");
-
 	shader->use();
+
+	Camera::active->updateShader(*shader, "u_camera");
 	updateUniforms();
 
 	mesh->draw();

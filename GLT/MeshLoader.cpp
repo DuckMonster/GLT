@@ -79,8 +79,9 @@ vector<vector<float>> MeshLoader::loadFBXRaw(const char* fileName, bool triangul
 				}
 				else {
 					vector<int> polygonVertexIndicies;
-					for (int k = 0; k < vertCount; k++)
+					for (int k = 0; k < vertCount; k++) {
 						polygonVertexIndicies.push_back(mesh->GetPolygonVertex(j, k));
+					}
 
 					addFace(&meshData, vertices, &polygonVertexIndicies[0], vertCount);
 				}

@@ -16,9 +16,9 @@ Mesh::Mesh() {
 }
 
 void Mesh::init() {
-	vbo_vertices.init(3);
-	vbo_colors.init(4);
-	vbo_uvs.init(2);
+	vbo_vertices.setDataSize(3);
+	vbo_colors.setDataSize(4);
+	vbo_uvs.setDataSize(2);
 }
 
 void Mesh::setDataUsage(GLenum usage) {
@@ -55,9 +55,6 @@ void Mesh::fillVertices(size_t count) {
 }
 
 void Mesh::draw() {
-	if (texture != nullptr)
-		texture->bind();
-
 	vao.bind();
 	glDrawArrays(drawMode, 0, vertex_count);
 }

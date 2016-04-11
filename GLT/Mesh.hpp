@@ -12,7 +12,8 @@ namespace glt {
 	class Mesh {
 	public:
 		GLuint drawMode = GL_TRIANGLES;
-		Texture* texture = nullptr;
+
+		//-----------
 
 		Mesh();
 
@@ -32,7 +33,7 @@ namespace glt {
 	private:
 		VAO vao;
 		VBO vbo_vertices, vbo_colors, vbo_uvs;
-		std::size_t vertex_count;
+		std::size_t vertex_count = 0;
 
 		//-----------
 

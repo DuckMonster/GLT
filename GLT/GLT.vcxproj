@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)-D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -123,6 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,23 +155,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawer.cpp" />
     <ClCompile Include="MeshLoader.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RenderBuffer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Stencil.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="FrameBuffer.hpp" />
     <ClInclude Include="GLT.h" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="MeshDrawer.hpp" />
     <ClInclude Include="MeshLoader.hpp" />
     <ClInclude Include="Ray.hpp" />
+    <ClInclude Include="RenderBuffer.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Stencil.hpp" />
     <ClInclude Include="Texture.hpp" />

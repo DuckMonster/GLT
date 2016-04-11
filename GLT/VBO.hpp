@@ -8,7 +8,7 @@ namespace glt {
 	public:
 		GLenum dataUsage = GL_STATIC_DRAW;
 
-		VBO() { }
+		VBO() { init(3); }
 		VBO(size_t size) { init(size); }
 		~VBO() { dispose(); }
 
