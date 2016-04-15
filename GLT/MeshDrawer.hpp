@@ -32,7 +32,7 @@ namespace glt {
 		void reset();
 		void genModelMatrix();
 
-		void draw();
+		virtual void draw();
 
 	private:
 		//

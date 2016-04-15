@@ -48,7 +48,13 @@ mat4 Camera::getMatrix() {
 
 	clean();
 
-	mat4 projection = glm::perspective(fieldOfView, getAspectRatio(), near, far);
+	mat4 projection;
+	
+	if (perspective)
+		projection = glm::perspective(fieldOfView, getAspectRatio(), near, far);
+	else
+		projection = glm::ortho(-getAspectRatio(), getAspectRatio(), -1.f, 1.f);
+
 	mat4 view = glm::lookAt(position, position + direction, vec3(0.f, 1.f, 0.f));
 
 	cameraMatrix = projection * view;

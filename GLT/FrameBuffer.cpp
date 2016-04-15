@@ -98,8 +98,6 @@ void FrameBuffer::display(Shader* shader) {
 		shader = display_shader;
 	}
 
-	FrameBuffer::release();
-
 	display_VAO->bind();
 	shader->use();
 	texture.bind();
