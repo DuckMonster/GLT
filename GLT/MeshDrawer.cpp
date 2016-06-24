@@ -8,7 +8,7 @@ using namespace glt;
 
 #pragma region
 const char* MESH_SRC_VERTEX =
-"#version 450\n"
+"#version 330 core\n"
 "in vec3 v_position;"
 "in vec4 v_color;"
 "in vec2 v_uv;"
@@ -26,7 +26,7 @@ const char* MESH_SRC_VERTEX =
 "}";
 
 const char* MESH_SRC_FRAGMENT =
-"#version 450\n"
+"#version 330 core\n"
 "uniform sampler2D u_texture;"
 "uniform bool u_usingTexture;"
 
@@ -101,6 +101,7 @@ void MeshDrawer::bindAttributes() {
 	vao->bindBufferToAttr(mesh->getVertexVBO(), shader->getAttrib("v_position"));
 	vao->bindBufferToAttr(mesh->getColorVBO(), shader->getAttrib("v_color"));
 	vao->bindBufferToAttr(mesh->getUvVBO(), shader->getAttrib("v_uv"));
+	vao->bindBufferToAttr(mesh->getNormalVBO(), shader->getAttrib("v_normal"));
 }
 
 //Transformations
@@ -153,6 +154,7 @@ void MeshDrawer::genModelMatrix() {
 	//Transpose it for glm :)
 	//modelMatrix = transpose(model);
 	modelMatrix = model; //<--- pre-transposed for performance
+	normalMatrix = transpose(inverse(mat3(modelMatrix)));
 
 	clean();
 }
@@ -183,15 +185,22 @@ void MeshDrawer::updateUniforms() {
 		genModelMatrix();
 
 	//Model
-	glUniformMatrix4fv(shader->getUniform("u_model"), 1, false, glm::value_ptr(modelMatrix));
+	shader->set("u_model", modelMatrix);
+
+	mat4 mvpMatrix = Camera::active->getMatrix() * modelMatrix;
+	shader->set("u_mvp", mvpMatrix);
+
+	//Normal
+	shader->set("u_normal", normalMatrix);
 
 	//Texture
-	glUniform1i(shader->getUniform("u_usingTexture"), texture == nullptr ? 0 : 1);
+	shader->set("u_usingTexture", texture != nullptr);
+
 	if (texture != nullptr)
 		texture->bind();
 
 	//Color
-	glUniform4fv(shader->getUniform("u_blendColor"), 1, glm::value_ptr(color));
+	shader->set("u_blendColor", color);
 }
 
 void MeshDrawer::draw() {
@@ -199,9 +208,6 @@ void MeshDrawer::draw() {
 		return;
 
 	shader->use();
-
-	Camera::active->updateShader(*shader, "u_camera");
 	updateUniforms();
-
 	mesh->draw();
 }

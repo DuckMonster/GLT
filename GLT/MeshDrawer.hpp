@@ -10,6 +10,7 @@ namespace glt {
 		glm::vec3 rotation = glm::vec3(0.f);
 
 		glm::mat4 modelMatrix = glm::mat4(1.f);
+		glm::mat3 normalMatrix = glm::mat3(1.f);
 		bool autoGenMatrix = true;
 
 		//Color
