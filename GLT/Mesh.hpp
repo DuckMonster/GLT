@@ -11,11 +11,17 @@
 namespace glt {
 	class Mesh {
 	public:
+		enum Primitive {
+			Quad,
+			Triangle
+		};
+
 		GLuint drawMode = GL_TRIANGLES;
 
 		//-----------
 
 		Mesh();
+		Mesh(Primitive primitive);
 
 		void setVertices(const float*, int);
 		void setUVS(const float*, int);
@@ -31,6 +37,8 @@ namespace glt {
 
 		void setDataUsage(GLenum usage);
 		void flipUV();
+
+		void loadPrimitive(Primitive primitive);
 
 		void draw();
 

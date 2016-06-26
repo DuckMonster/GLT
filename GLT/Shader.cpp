@@ -28,10 +28,21 @@ string Shader::ReadFile(std::string filename) {
 }
 
 Shader::Shader(string vertexSrc, string fragmentSrc) {
-	init(vertexSrc, fragmentSrc);
+	compile(vertexSrc, fragmentSrc);
 }
 
-void Shader::init(string vertexSrc, string fragmentSrc) {
+void Shader::dispose() {
+	if (program == -1)
+		return;
+
+	glDeleteProgram(program);
+	program = -1;
+}
+
+void Shader::compile(string vertexSrc, string fragmentSrc) {
+	//Dispose shader in case it already compiled something else
+	dispose();
+
 	//Init
 	program = glCreateProgram();
 	GLuint vertex = createShader(GL_VERTEX_SHADER, vertexSrc.c_str());
@@ -45,7 +56,7 @@ void Shader::init(string vertexSrc, string fragmentSrc) {
 	//Cleanup shaders after linking
 	glDetachShader(program, vertex);
 	glDetachShader(program, fragment);
-	glDeleteShader(vertex); 
+	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 }
 

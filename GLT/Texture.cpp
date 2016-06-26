@@ -18,10 +18,18 @@ Texture::~Texture() {
 }
 
 void Texture::dispose() {
+	if (handle == -1)
+		return;
+
 	glDeleteTextures(1, &handle);
+	handle = -1;
 }
 
 void Texture::init() {
+	//If already initialized, back away
+	if (handle != -1)
+		return;
+
 	//Generate
 	glGenTextures(1, &handle);
 	
@@ -34,24 +42,14 @@ void Texture::init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-void Texture::bind() {
-	glBindTexture(GL_TEXTURE_2D, handle);
+void Texture::init(GLuint internalFormat, GLenum format, GLenum dataType, size_t width, size_t height) {
+	init();
+	bind();
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, dataType, NULL);
 }
 
-void Texture::bindToFramebuffer(FrameBuffer* framebuffer) {
-	//Set stats
-	width = framebuffer->getWidth();
-	height = framebuffer->getHeight();
-
-	//Bind to null
-	bind();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-
-	framebuffer->bind();
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, handle, 0);
-
-	//Release the framebuffer
-	FrameBuffer::release();
+void Texture::bind() {
+	glBindTexture(GL_TEXTURE_2D, handle);
 }
 
 void Texture::loadFile(const char* source) {

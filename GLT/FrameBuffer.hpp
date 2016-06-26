@@ -1,18 +1,13 @@
 #pragma once
 #include <gl\glew.h>
+#include <vector>
 #include "Texture.hpp"
 #include "RenderBuffer.hpp"
 
 namespace glt {
 	class FrameBuffer {
 	public:
-		static size_t clientWidth;
-		static size_t clientHeight;
-
-		static void release() {
-			glBindFramebuffer(GL_FRAMEBUFFER, 0); 
-			glViewport(0, 0, clientWidth, clientHeight);
-		}
+		static void release();
 
 		//---------
 
@@ -22,32 +17,28 @@ namespace glt {
 		size_t getWidth() { return width; }
 		size_t getHeight() { return height; }
 
-		Texture* getTexture() { return &texture; }
+		bool isComplete();
 
 		const GLuint getHandle() { return handle; }
 
+		void bindTexture(Texture* texture, GLenum attachment);
+		void bindRenderBuffer(RenderBuffer* renderBuffer, GLenum attachment);
+
 		void bind();
-		void display(Shader* shader = nullptr);
 
 	private:
-		//Static
-		static Shader* display_shader;
-		static VAO* display_VAO;
-		static VBO* display_VBO_position,* display_VBO_uv;
-		static void initDisplay();
+		static glm::ivec2 clientSize;
+		static GLuint boundBuffer;
+
+		//----------
+
+		std::vector<GLenum> colorAttachments;
 
 		//----------
 
 		GLuint handle;
 
 		size_t width, height;
-
-		//TEMPORARY STUFF
-		Texture texture;
-		RenderBuffer renderBuffer;
-		//
-
-		//----------
 
 		void init();
 	};

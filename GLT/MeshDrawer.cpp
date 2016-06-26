@@ -13,14 +13,14 @@ const char* MESH_SRC_VERTEX =
 "in vec4 v_color;"
 "in vec2 v_uv;"
 
-"uniform mat4 u_camera;"
+"uniform mat4 u_mvp;"
 "uniform mat4 u_model;"
 
 "out vec4 f_color;"
 "out vec2 f_uv;"
 
 "void main() {"
-"	gl_Position = u_camera * u_model * vec4(v_position, 1.0);"
+"	gl_Position = u_mvp * vec4(v_position, 1.0);"
 "	f_color = v_color;"
 "	f_uv = v_uv;"
 "}";
@@ -54,6 +54,7 @@ void MeshDrawer::compileDefaultShader() {
 		return;
 
 	MeshDrawer::DEFAULT_SHADER = new Shader(MESH_SRC_VERTEX, MESH_SRC_FRAGMENT);
+	MeshDrawer::DEFAULT_SHADER->uniformNotFoundWarning = false;
 }
 
 MeshDrawer::MeshDrawer() {

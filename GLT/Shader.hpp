@@ -12,7 +12,7 @@ namespace glt {
 
 		//-------------
 
-		bool uniformNotFoundWarning = false;
+		bool uniformNotFoundWarning = true;
 
 		//-------------
 
@@ -20,7 +20,8 @@ namespace glt {
 		Shader(std::string, std::string);
 		~Shader() { dispose(); }
 
-		void dispose() { glDeleteProgram(program); }
+		void compile(std::string, std::string);
+		void dispose();
 
 		void use();
 		GLuint getUniform(const char* name);
@@ -40,11 +41,10 @@ namespace glt {
 
 	private:
 		static GLuint activeProgram;
-		GLuint program;
+		GLuint program = -1;
 
 		std::set<std::string> uniformErrorSet;
 
-		void init(std::string, std::string);
 		GLuint createShader(GLenum, const char*);
 	};
 }

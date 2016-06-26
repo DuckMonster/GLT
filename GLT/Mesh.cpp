@@ -14,6 +14,11 @@ Mesh::Mesh() {
 	init();
 }
 
+Mesh::Mesh(Primitive primitive) {
+	init();
+	loadPrimitive(primitive);
+}
+
 void Mesh::init() {
 	vbo_vertices.setDataSize(3);
 	vbo_colors.setDataSize(4);
@@ -63,6 +68,65 @@ void Mesh::fillVertices(size_t count) {
 	vbo_colors.setVertexCount(count, 1.f);
 	vbo_uvs.setVertexCount(count, 1.f);
 	vbo_normals.setVertexCount(count, 0.f);
+}
+
+void Mesh::loadPrimitive(Primitive primitive) {
+	switch (primitive) {
+	case Quad: {
+		float vertices[] {
+			-0.5f, -0.5f, 0.f,
+			0.5f, -0.5f, 0.f,
+			-0.5f, 0.5f, 0.f,
+
+			0.5f, -0.5f, 0.f,
+			-0.5f, 0.5f, 0.f,
+			0.5f, 0.5f, 0.f
+		};
+		float uvs[]{
+			0.f, 0.f,
+			1.f, 0.f,
+			0.f, 1.f,
+
+			1.f, 0.f,
+			0.f, 1.f,
+			1.f, 1.f
+		};
+		float normals[] {
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f,
+
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f,
+		};
+
+		setVertices(vertices, sizeof(vertices));
+		setUVS(uvs, sizeof(uvs));
+		setNormals(normals, sizeof(normals));
+	} break;
+
+	case Triangle:
+		float vertices[]{
+			-0.5f, -0.5f, 0.f,
+			0.5f, -0.5f, 0.f,
+			-0.5f, 0.5f, 0.f
+		};
+		float uvs[]{
+			0.f, 0.f,
+			1.f, 0.f,
+			0.f, 1.f
+		};
+		float normals[]{
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f,
+			0.f, 0.f, -1.f
+		};
+
+		setVertices(vertices, sizeof(vertices));
+		setUVS(uvs, sizeof(uvs));
+		setNormals(normals, sizeof(normals));
+	}
 }
 
 void Mesh::draw() {
