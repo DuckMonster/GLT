@@ -12,7 +12,7 @@ namespace glt {
 		//---------
 
 		FrameBuffer(size_t width, size_t height);
-		~FrameBuffer();
+		~FrameBuffer();	
 
 		size_t getWidth() { return width; }
 		size_t getHeight() { return height; }
@@ -21,8 +21,8 @@ namespace glt {
 
 		const GLuint getHandle() { return handle; }
 
-		void bindTexture(Texture* texture, GLenum attachment);
-		void bindRenderBuffer(RenderBuffer* renderBuffer, GLenum attachment);
+		void bindTexture(Texture& texture, GLenum attachment);
+		void bindRenderBuffer(RenderBuffer& renderBuffer, GLenum attachment);
 
 		void bind();
 
@@ -32,13 +32,12 @@ namespace glt {
 
 		//----------
 
+		GLuint handle;
+		size_t width, height;
+
 		std::vector<GLenum> colorAttachments;
 
 		//----------
-
-		GLuint handle;
-
-		size_t width, height;
 
 		void init();
 	};

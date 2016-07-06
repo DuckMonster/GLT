@@ -5,8 +5,10 @@
 namespace glt {
 	class FrameBufferUtils {
 	public:
-		static void Display(Texture* buffer);
-		static void Display(Texture* buffer, glm::vec2 min, glm::vec2 max);
+		static void Quad();
+		static void Quad(glm::vec2 min, glm::vec2 max);
+		static void Quad(Shader* shader);
+		static void Quad(Shader* shader, glm::vec2 min, glm::vec2 max);
 
 	private:
 		static Shader* displayShader;

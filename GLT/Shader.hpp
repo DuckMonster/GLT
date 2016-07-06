@@ -43,6 +43,7 @@ namespace glt {
 		static GLuint activeProgram;
 		GLuint program = -1;
 
+		std::set<std::string> attributeErrorSet;
 		std::set<std::string> uniformErrorSet;
 
 		GLuint createShader(GLenum, const char*);

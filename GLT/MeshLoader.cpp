@@ -13,10 +13,11 @@ void MeshData::append(MeshData& other) {
 FbxManager* MeshLoader::manager = nullptr;
 
 vector<float> MeshLoader::readControlPoints(FbxMesh* mesh) {
-	vector<float> pointList;
+	//Reserve vector to fit all control points
+	int triCount = mesh->GetPolygonCount();
+	vector<float> pointList(triCount * 3 * 3, 0.f);
 
 	//Loop through triangles
-	int triCount = mesh->GetPolygonCount();
 	for (int i = 0; i < triCount; i++) {
 
 		//Loop through vertices
@@ -26,9 +27,12 @@ vector<float> MeshLoader::readControlPoints(FbxMesh* mesh) {
 			FbxVector4 point = mesh->GetControlPointAt(ctrlPointIndex);
 
 			//Add it to the list
-			pointList.push_back(static_cast<float>(point.mData[0]));
+			/*pointList.push_back(static_cast<float>(point.mData[0]));
 			pointList.push_back(static_cast<float>(point.mData[1]));
-			pointList.push_back(static_cast<float>(point.mData[2]));
+			pointList.push_back(static_cast<float>(point.mData[2]));*/
+
+			for (int v = 0; v < 3; v++)
+				pointList[i * 3 * 3 + j * 3 + v] = static_cast<float>(point.mData[v]);
 		}
 	}
 
@@ -40,9 +44,6 @@ vector<float> MeshLoader::readNormals(FbxMesh* mesh) {
 		cout << "Invalid normal data...\n";
 		return vector<float>();
 	}
-
-	//Return list
-	vector<float> normalList;
 
 	//Normal data
 	FbxGeometryElementNormal* normalData = mesh->GetElementNormal(0);
@@ -56,8 +57,11 @@ vector<float> MeshLoader::readNormals(FbxMesh* mesh) {
 		return vector<float>();
 	}
 
-	//Loop through each triangle
+	//Pre-fill vector for performance
 	int triCount = mesh->GetPolygonCount();
+	vector<float> normalList(triCount * 3 * 3, 0.f);
+
+	//Loop through each triangle
 	for (int i = 0; i < triCount; i++) {
 
 		//... and each vertex of each triangle
@@ -85,9 +89,8 @@ vector<float> MeshLoader::readNormals(FbxMesh* mesh) {
 			FbxVector4 vNormal = normalData->GetDirectArray().GetAt(index);
 
 			//Add to list
-			normalList.push_back(static_cast<float>(vNormal.mData[0]));
-			normalList.push_back(static_cast<float>(vNormal.mData[1]));
-			normalList.push_back(static_cast<float>(vNormal.mData[2]));
+			for (int v = 0; v < 3; v++)
+				normalList[i * 3 * 3 + j * 3 + v] = static_cast<float>(vNormal.mData[v]);
 		}
 	}
 
@@ -99,9 +102,6 @@ vector<float> MeshLoader::readUV(FbxMesh* mesh) {
 		cout << "Invalid normal data...\n";
 		return vector<float>();
 	}
-
-	//Return list
-	vector<float> uvList;
 
 	//UV data
 	FbxGeometryElementUV* uvData = mesh->GetElementUV(0);
@@ -118,8 +118,11 @@ vector<float> MeshLoader::readUV(FbxMesh* mesh) {
 		return vector<float>();
 	}
 
-	//Loop through each triangle
+	//Pre-fill vector for performance
 	int triCount = mesh->GetPolygonCount();
+	vector<float> uvList(triCount * 3 * 2, 0.f);
+
+	//Loop through each triangle
 	for (int i = 0; i < triCount; i++) {
 
 		//... and each vertex of each triangle
@@ -147,8 +150,8 @@ vector<float> MeshLoader::readUV(FbxMesh* mesh) {
 			FbxVector2 vUV = uvData->GetDirectArray().GetAt(index);
 
 			//Add to list
-			uvList.push_back(static_cast<float>(vUV.mData[0]));
-			uvList.push_back(static_cast<float>(vUV.mData[1]));
+			for (int v = 0; v < 2; v++)
+				uvList[i * 3 * 2 + j * 2 + v] = static_cast<float>(vUV.mData[v]);
 		}
 	}
 
@@ -195,6 +198,7 @@ vector<MeshData> MeshLoader::processNode(FbxNode* root) {
 }
 
 Mesh* MeshLoader::loadFBX(const char* fileName) {
+	cout << "Loading " << fileName << " ... ";
 	vector<MeshData> data = loadFBXRaw(fileName);
 
 	if (data.size() > 0) {
@@ -208,6 +212,8 @@ Mesh* MeshLoader::loadFBX(const char* fileName) {
 		mesh->setVertices(&combinedData.positions[0], combinedData.positions.size() * sizeof(float));
 		mesh->setUVS(&combinedData.uvs[0], combinedData.uvs.size() * sizeof(float));
 		mesh->setNormals(&combinedData.normals[0], combinedData.normals.size() * sizeof(float));
+
+		cout << " DONE!\n";
 
 		return mesh;
 	}

@@ -41,8 +41,7 @@ void VBO::setVertexCount(size_t count, float defValue) {
 		return;
 
 	if (count > data.size()) {
-		for (size_t i = data.size(); i < count; i++)
-			data.push_back(defValue);
+		data.insert(data.end(), count - data.size(), defValue);
 
 		setData(data);
 	}

@@ -19,6 +19,7 @@ namespace glt {
 		int getHeight() { return height; }
 
 		void bind();
+		void bind(unsigned int index);
 		void loadFile(const char* source);
 
 		GLuint getHandle() { return handle; }

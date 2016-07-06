@@ -2,27 +2,39 @@ import os;
 import shutil;
 import sys;
 
-projName = sys.argv[1];
+srcPath_inc = "./GLT/";
+desPath_inc = "./!RELEASE/include/GLT/";
 
-srcInc = "./" + projName + "/";
-srcLib = "./Debug/";
-desInc = "./Dist/include/" + projName + "/";
-desLib = "./Dist/lib/";
+srcPath_lib = "./Bin/";
+desPath_lib = "./!RELEASE/lib/";
 
-if not os.path.exists(desInc):
-	os.makedirs(desInc);
-	
-if not os.path.exists(desLib):
-	os.makedirs(desLib);
+
+print "[CLEANING]"
+for file in os.listdir(desPath_inc):
+	filePath = os.path.join(desPath_inc, file);
+	if (os.path.isfile(filePath)):
+		os.unlink(filePath);
+		print filePath;
 
 print "[INCLUDES]";
-for file in os.listdir(srcInc):
+for file in os.listdir(srcPath_inc):
 	if file.endswith(".h") or file.endswith(".hpp"):
-		print file;
-		shutil.copyfile(srcInc + file, desInc + file);
-		
-print "\n[LIBRARIES]"
-for file in os.listdir(srcLib):
-	if file.endswith(".lib"):
-		print file;
-		shutil.copyfile(srcLib + file, desLib + file);
+		fileSrc = os.path.join(srcPath_inc, file);
+		fileDes = os.path.join(desPath_inc, file);
+
+		shutil.copyfile(fileSrc, fileDes);
+		print fileSrc + " --> " + fileDes;
+
+print "[LIBS]"
+def copyLibrary( suffix ):
+	for file in os.listdir(srcPath_lib + suffix):
+		if file.endswith(".lib"):
+			fileSrc = os.path.join(srcPath_lib + suffix, file);
+			fileDes = os.path.join(desPath_lib, file);
+
+			print fileSrc + " --> " + fileDes;
+			shutil.copyfile(fileSrc, fileDes);
+
+#Debug libraries
+copyLibrary("Debug/");
+copyLibrary("Release/");

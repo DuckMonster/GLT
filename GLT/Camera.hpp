@@ -15,12 +15,16 @@ namespace glt {
 		vec3 position = vec3(0.f, 0.f, 1.f);
 		vec3 direction = vec3(0.f, 0.f, -1.f);
 
-		float fieldOfView = 0.45f;
+		float fieldOfView = 90.f;
 		float near = 0.1f;
 		float far = 100.f;
 
 		bool perspective = true;
+		float orthoFrustum = 1.f;
+
 		vec2 screenSize = vec2(800.f, 600.f);
+
+		//-----------
 
 		Camera(vec2 screenSize);
 
@@ -46,7 +50,10 @@ namespace glt {
 		float far_old;
 
 		bool perspective_old;
+		float orthoFrustum_old;
+
 		vec2 screenSize_old;
+
 		//---
 
 		void checkDirty();

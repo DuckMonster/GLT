@@ -115,7 +115,14 @@ GLuint Shader::getUniform(const char* name) {
 }
 
 GLuint Shader::getAttrib(const char* name) {
-	return glGetAttribLocation(program, name);
+	GLuint attribPos = glGetAttribLocation(program, name);
+
+	if (attribPos == -1 && attributeErrorSet.find(name) == attributeErrorSet.end()) {
+		cout << "Couldn't find attribute " << name << "!\n";
+		attributeErrorSet.insert(name);
+	}
+
+	return attribPos;
 }
 
 //Uniform sets

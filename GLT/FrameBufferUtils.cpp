@@ -68,15 +68,11 @@ void FrameBufferUtils::InitDisplay() {
 	displayMesh->getVAO()->bindBufferToAttr(displayMesh->getUvVBO(), displayShader->getAttrib("a_uv"));
 }
 
-void FrameBufferUtils::Display(Texture* buffer) {
-	InitDisplay();
+void FrameBufferUtils::Quad() { Quad(displayShader, vec2(-1.f), vec2(1.f)); }
+void FrameBufferUtils::Quad(vec2 min, vec2 max) { Quad(displayShader, min, max); }
+void FrameBufferUtils::Quad(Shader* shader) { Quad(shader, vec2(-1.f), vec2(1.f)); }
 
-	buffer->bind();
-	displayShader->use();
-	displayMesh->draw();
-}
-
-void FrameBufferUtils::Display(Texture* buffer, vec2 min, vec2 max) {
+void FrameBufferUtils::Quad(Shader* shader, vec2 min, vec2 max) {
 	InitDisplay();
 
 	//Set vertices
@@ -92,7 +88,10 @@ void FrameBufferUtils::Display(Texture* buffer, vec2 min, vec2 max) {
 
 	displayMesh->setVertices(vertices, sizeof(vertices));
 
-	buffer->bind();
-	displayShader->use();
+	if (shader != nullptr)
+		shader->use();
+	else
+		displayShader->use();
+
 	displayMesh->draw();
 }

@@ -9,9 +9,9 @@ using namespace glt;
 #pragma region
 const char* MESH_SRC_VERTEX =
 "#version 330 core\n"
-"in vec3 v_position;"
-"in vec4 v_color;"
-"in vec2 v_uv;"
+"in vec3 a_position;"
+"in vec4 a_color;"
+"in vec2 a_uv;"
 
 "uniform mat4 u_mvp;"
 "uniform mat4 u_model;"
@@ -20,9 +20,9 @@ const char* MESH_SRC_VERTEX =
 "out vec2 f_uv;"
 
 "void main() {"
-"	gl_Position = u_mvp * vec4(v_position, 1.0);"
-"	f_color = v_color;"
-"	f_uv = v_uv;"
+"	gl_Position = u_mvp * vec4(a_position, 1.0);"
+"	f_color = a_color;"
+"	f_uv = a_uv;"
 "}";
 
 const char* MESH_SRC_FRAGMENT =
@@ -99,10 +99,10 @@ void MeshDrawer::bindAttributes() {
 		return;
 
 	VAO* vao = mesh->getVAO();
-	vao->bindBufferToAttr(mesh->getVertexVBO(), shader->getAttrib("v_position"));
-	vao->bindBufferToAttr(mesh->getColorVBO(), shader->getAttrib("v_color"));
-	vao->bindBufferToAttr(mesh->getUvVBO(), shader->getAttrib("v_uv"));
-	vao->bindBufferToAttr(mesh->getNormalVBO(), shader->getAttrib("v_normal"));
+	vao->bindBufferToAttr(mesh->getVertexVBO(), shader->getAttrib("a_position"));
+	vao->bindBufferToAttr(mesh->getColorVBO(), shader->getAttrib("a_color"));
+	vao->bindBufferToAttr(mesh->getUvVBO(), shader->getAttrib("a_uv"));
+	vao->bindBufferToAttr(mesh->getNormalVBO(), shader->getAttrib("a_normal"));
 }
 
 //Transformations

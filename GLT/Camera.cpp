@@ -21,6 +21,7 @@ void Camera::checkDirty() {
 		near_old != near ||
 		far_old != far ||
 		perspective_old != perspective ||
+		orthoFrustum_old != orthoFrustum ||
 		screenSize_old != screenSize) {
 		isDirty = true;
 	}
@@ -35,6 +36,8 @@ void Camera::clean() {
 	far_old = far;
 
 	perspective_old = perspective;
+	orthoFrustum_old = orthoFrustum;
+
 	screenSize_old = screenSize;
 
 	isDirty = false;
@@ -49,11 +52,11 @@ mat4 Camera::getMatrix() {
 	clean();
 
 	mat4 projection;
-	
+
 	if (perspective)
-		projection = glm::perspective(fieldOfView, getAspectRatio(), near, far);
+		projection = glm::perspective(radians(fieldOfView), getAspectRatio(), near, far);
 	else
-		projection = glm::ortho(-getAspectRatio(), getAspectRatio(), -1.f, 1.f);
+		projection = glm::ortho(-getAspectRatio() * orthoFrustum, getAspectRatio() * orthoFrustum, -orthoFrustum, orthoFrustum, near, far);
 
 	mat4 view = glm::lookAt(position, position + direction, vec3(0.f, 1.f, 0.f));
 
