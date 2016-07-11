@@ -201,17 +201,17 @@ moveFiles.py</Command>
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="FrameBufferUtils.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshDrawer.cpp" />
     <ClCompile Include="MeshLoader.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RenderBuffer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Stencil.cpp" />
-    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TextMesh.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
@@ -221,19 +221,22 @@ moveFiles.py</Command>
     <ClInclude Include="FrameBuffer.hpp" />
     <ClInclude Include="FrameBufferUtils.hpp" />
     <ClInclude Include="GLT.h" />
+    <ClInclude Include="Log.hpp" />
     <ClInclude Include="Mesh.hpp" />
-    <ClInclude Include="MeshDrawer.hpp" />
     <ClInclude Include="MeshLoader.hpp" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="RenderBuffer.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Stencil.hpp" />
-    <ClInclude Include="TextBox.hpp" />
     <ClInclude Include="TextMesh.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="Time.hpp" />
+    <ClInclude Include="Transform.hpp" />
     <ClInclude Include="VAO.hpp" />
     <ClInclude Include="VBO.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

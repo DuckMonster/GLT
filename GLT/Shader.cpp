@@ -39,6 +39,10 @@ void Shader::dispose() {
 	program = -1;
 }
 
+void Shader::compile(string srcFileName) {
+	compile(srcFileName + ".vert", srcFileName + ".frag");
+}
+
 void Shader::compile(string vertexSrc, string fragmentSrc) {
 	//Dispose shader in case it already compiled something else
 	dispose();

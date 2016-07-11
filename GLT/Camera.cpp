@@ -9,7 +9,7 @@ Camera* Camera::active = nullptr;
 
 Camera::Camera(vec2 screenSize) {
 	if (active == nullptr)
-		setActive();
+		use();
 
 	this->screenSize = screenSize;
 }
@@ -81,10 +81,6 @@ vec2 Camera::worldToScreen(vec3 world) {
 	return vec2(getMatrix() * vec4(world, 1.0));
 }
 
-void Camera::setActive() {
+void Camera::use() {
 	Camera::active = this;
-}
-
-void Camera::updateShader(GLuint program, const char* vpName) {
-	glUniformMatrix4fv(glGetUniformLocation(program, vpName), 1, false, value_ptr(getMatrix()));
 }

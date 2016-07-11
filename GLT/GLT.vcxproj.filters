@@ -13,114 +13,135 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Mesh">
+      <UniqueIdentifier>{948ffd9e-94a8-403f-8e04-389e40d71f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{4eb71abb-5beb-4487-920d-14dcf30dda3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GL">
+      <UniqueIdentifier>{0b08b518-bc06-4591-b62a-410a82cea7fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mesh">
+      <UniqueIdentifier>{ab7c4bac-5908-4b0e-8692-938bdd143514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GL">
+      <UniqueIdentifier>{0163019f-21ad-4b3e-8fe8-819bbb33e260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{d2f9a9c5-63a1-42fb-ae30-ab7e742e2728}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VAO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stencil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshDrawer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="TextMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextBox.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Source Files\GL</Filter>
     </ClCompile>
     <ClCompile Include="FrameBufferUtils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoader.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBuffer.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Stencil.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="TextMesh.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GLT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VBO.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VAO.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Time.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stencil.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="MeshLoader.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="MeshDrawer.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Transform.hpp">
+      <Filter>Header Files\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="FrameBuffer.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Camera.hpp">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="RenderBuffer.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Time.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.hpp">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Font.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextMesh.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextBox.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="FrameBufferUtils.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="FrameBuffer.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBuffer.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="TextMesh.hpp">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Stencil.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.hpp">
+      <Filter>Header Files\GL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

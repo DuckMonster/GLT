@@ -1,5 +1,7 @@
 #include "Stencil.hpp"
 
+using namespace glt;
+
 void Stencil::start() {
 	glEnable(GL_STENCIL_TEST);
 }
