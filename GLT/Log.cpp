@@ -3,22 +3,17 @@
 #include <iostream>
 #include <ctime>
 
+#include "LogLevel.hpp"
+
 using namespace glt::debug;
 using namespace std;
 
-size_t Log::debugLevel = 0;
+///////
+// LOGGER
+///////
 
-///<summary>Minimum debug level to output. The higher the level the more important the message.</summary>
-void Log::setDebugLevel( size_t level ) {
-	debugLevel = level;
-
-	write( "Debug level set to " + debugLevel, -1 );
-}
-
-///<symmary>Write message to log</summary>
-void Log::write( string message, size_t level ) {
-	if (level < debugLevel)
-		return;
+Logger::Logger( size_t level ) {
+	this->level = level;
 
 	// Get the time
 	time_t timer;
@@ -27,7 +22,54 @@ void Log::write( string message, size_t level ) {
 	tm* time;
 	time = localtime( &timer );
 
-	// TODO - Add output stream customization support
-	cout << "[" << time->tm_hour << ":" << time->tm_min << ":" << time->tm_sec << "] ";
-	cout << message << "\n";
+	(*this) << "[" << time->tm_hour << ":" << time->tm_min << ":" << time->tm_sec << "] ";
+}
+
+Logger& Logger::operator<<( char* val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
+}
+Logger& Logger::operator<<( string val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
+}
+Logger& Logger::operator<<( int val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
+}
+Logger& Logger::operator<<( size_t val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
+}
+Logger& Logger::operator<<( float val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
+}
+Logger& Logger::operator<<( double val ) {
+	// Check debug level
+	if (level < logLevel)
+		return *this;
+
+	cout << val;
+	return *this;
 }

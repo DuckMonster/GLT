@@ -58,15 +58,15 @@ mat4 Camera::getMatrix() {
 	else
 		projection = glm::ortho(-getAspectRatio() * orthoFrustum, getAspectRatio() * orthoFrustum, -orthoFrustum, orthoFrustum, near, far);
 
-	mat4 view = glm::lookAt(position, position + direction, vec3(0.f, 1.f, 0.f));
+	mat4 view = glm::lookAt(position, position + direction, up);
 
 	cameraMatrix = projection * view;
 	return cameraMatrix;
 }
 
 Ray Camera::screenToWorld(vec2 screen) {
-	screen = clamp(screen, vec2(0.f), screenSize);
-	screen = (screen / screenSize - vec2(0.5f)) * vec2(2.f, -2.f);
+	screen		= clamp(screen, vec2(0.f), screenSize);
+	screen		= (screen / screenSize - vec2(0.5f)) * vec2(2.f, -2.f);
 
 	mat4 projView = getMatrix();
 	projView = inverse(projView);

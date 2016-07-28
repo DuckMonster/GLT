@@ -9,7 +9,7 @@ srcPath_lib = "./Bin/";
 desPath_lib = "./!RELEASE/lib/";
 
 
-print "[CLEANING]"
+print "[CLEANING]";
 for file in os.listdir(desPath_inc):
 	filePath = os.path.join(desPath_inc, file);
 	if (os.path.isfile(filePath)):

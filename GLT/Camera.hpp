@@ -10,17 +10,18 @@ namespace glt {
 	public:
 		static Camera*		active;
 
-		vec3				position = vec3( 0.f, 0.f, 1.f );
-		vec3				direction = vec3( 0.f, 0.f, -1.f );
+		vec3				position		= vec3( 0.f, 0.f, 1.f );
+		vec3				direction		= vec3( 0.f, 0.f, -1.f );
+		vec3				up				= vec3( 0.f, 1.f, 0.f );
 
-		float				fieldOfView = 90.f;
-		float				near = 0.1f;		// Clipping planes
-		float				far = 100.f;		//
+		float				fieldOfView		= 90.f;
+		float				near			= 0.1f;			// Clipping planes
+		float				far				= 100.f;		//
 
-		bool				perspective = true;
-		float				orthoFrustum = 1.f;	// Height of frustum if using orthographic projection
+		bool				perspective		= true;
+		float				orthoFrustum	= 1.f;			// Height of frustum if using orthographic projection
 
-		vec2				screenSize = vec2( 800.f, 600.f ); // Used for calculating aspect ratio
+		vec2				screenSize		= vec2( 800.f, 600.f ); // Used for calculating aspect ratio
 
 		mat4				getMatrix( );
 
@@ -34,7 +35,7 @@ namespace glt {
 
 		// Projecting to screen
 		vec2			worldToScreen( vec3 world );
-		
+
 		float			getAspectRatio( ) { return screenSize.x / screenSize.y; }
 
 		// Use this camera

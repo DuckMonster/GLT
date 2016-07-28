@@ -29,14 +29,15 @@ const char* FBU_FRAG =
 "	outColor = texture(u_sampler, f_uv);"
 "}";
 
-Shader* FrameBufferUtils::displayShader = nullptr;
-Mesh* FrameBufferUtils::displayMesh = nullptr;
+Shader*		FrameBufferUtils::displayShader = nullptr;
+Mesh*		FrameBufferUtils::displayMesh = nullptr;
 
 void FrameBufferUtils::InitDisplay() {
 	if (displayShader != nullptr)
 		return;
 
-	displayShader = new Shader(FBU_VERT, FBU_FRAG);
+	displayShader = new Shader( );
+	displayShader->compile( FBU_VERT, FBU_FRAG );
 
 	displayMesh = new Mesh();
 	displayMesh->getVertexVBO()->setDataSize(2);

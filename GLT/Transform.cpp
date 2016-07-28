@@ -17,7 +17,7 @@ Transform::Transform( vec3 position, vec3 rotation, vec3 scale ) {
 
 mat4 Transform::getMatrix( ) {
 	// Return the buffer if the transform isn't dirty
-	if (!isDirty( ))
+	if ( !isDirty( ) )
 		return matrixBuffer;
 
 	//// ROTATION
@@ -45,30 +45,50 @@ mat4 Transform::getMatrix( ) {
 
 	// Pre-transposed
 	mat4 model(
-		yc*zc*sx + xs*ys*zs*sx,		xc*zs*sx,		-ys*zc*sx + xs*yc*zs*sx,		0,
-		xs*ys*zc*sy - yc*zs*sy,		xc*zc*sy,		xs*yc*zc*sy + ys*zs*sy,			0,
-		xc*ys*sz,					-xs*sz,			xc*yc*sz,						0,
-		tx,							ty,				tz,								1
+		yc*zc*sx + xs*ys*zs*sx, xc*zs*sx, -ys*zc*sx + xs*yc*zs*sx, 0,
+		xs*ys*zc*sy - yc*zs*sy, xc*zc*sy, xs*yc*zc*sy + ys*zs*sy, 0,
+		xc*ys*sz, -xs*sz, xc*yc*sz, 0,
+		tx, ty, tz, 1
 		);
 
 	// Transpose it for glm :)
 	// modelMatrix = transpose(model);
-	matrixBuffer = model; // <--- pre-transposed for performance
-
-	// Now that the matrix has been generated, mark it as clean
-	clean( );
+	setMatrix( model );
 
 	return matrixBuffer;
 }
 
+mat4 glt::Transform::getNormalMatrix( )
+{
+	return normalMatrix;
+}
+
+void glt::Transform::setMatrix( glm::mat4 matrix )	
+{
+	// Set the buffer to parameter
+	matrixBuffer	= matrix;
+	normalMatrix	= transpose( inverse( matrix ) );
+
+	// Clean the transform
+	// The position, rotation and scale will for now be invalid
+	// TODO Set 
+	clean( );
+}
+
 bool Transform::isDirty( ) {
-	return		position	!= position_old ||
-				rotation	!= rotation_old ||
-				scale		!= scale_old;
+	return position != position_old ||
+		rotation != rotation_old ||
+		scale != scale_old;
 }
 
 void Transform::clean( ) {
 	position_old	= position;
 	rotation_old	= rotation;
 	scale_old		= scale;
+}
+
+bool Transform::operator ==( Transform& other ) {
+	return position == other.position &&
+		rotation == other.rotation &&
+		scale == other.scale;
 }
