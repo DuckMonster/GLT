@@ -33,7 +33,7 @@ namespace glt {
 		GLuint						getHandle( ) const { return handle; }
 
 	private:
-		// Static variable for the current bound VBO
+		// Singleton for the currently bound VBO
 		static GLuint				current;
 
 		// --------

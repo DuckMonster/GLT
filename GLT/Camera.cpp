@@ -18,8 +18,8 @@ void Camera::checkDirty() {
 	if (position_old != position ||
 		direction_old != direction ||
 		fov_old != fieldOfView ||
-		near_old != near ||
-		far_old != far ||
+		near_old != nearPlane ||
+		far_old != farPlane ||
 		perspective_old != perspective ||
 		orthoFrustum_old != orthoFrustum ||
 		screenSize_old != screenSize) {
@@ -32,8 +32,8 @@ void Camera::clean() {
 	direction_old = direction;
 
 	fov_old = fieldOfView;
-	near_old = near;
-	far_old = far;
+	near_old = nearPlane;
+	far_old = farPlane;
 
 	perspective_old = perspective;
 	orthoFrustum_old = orthoFrustum;
@@ -54,9 +54,9 @@ mat4 Camera::getMatrix() {
 	mat4 projection;
 
 	if (perspective)
-		projection = glm::perspective(radians(fieldOfView), getAspectRatio(), near, far);
+		projection = glm::perspective(radians(fieldOfView), getAspectRatio(), nearPlane, farPlane);
 	else
-		projection = glm::ortho(-getAspectRatio() * orthoFrustum, getAspectRatio() * orthoFrustum, -orthoFrustum, orthoFrustum, near, far);
+		projection = glm::ortho(-getAspectRatio() * orthoFrustum, getAspectRatio() * orthoFrustum, -orthoFrustum, orthoFrustum, nearPlane, farPlane);
 
 	mat4 view = glm::lookAt(position, position + direction, up);
 

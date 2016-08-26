@@ -15,8 +15,8 @@ namespace glt {
 		vec3				up				= vec3( 0.f, 1.f, 0.f );
 
 		float				fieldOfView		= 90.f;
-		float				near			= 0.1f;			// Clipping planes
-		float				far				= 100.f;		//
+		float				nearPlane	    = 0.1f;			// Clipping planes
+		float				farPlane		= 100.f;		//
 
 		bool				perspective		= true;
 		float				orthoFrustum	= 1.f;			// Height of frustum if using orthographic projection

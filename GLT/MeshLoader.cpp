@@ -30,11 +30,6 @@ vector<float> MeshLoader::readControlPoints( FbxMesh* mesh ) {
 			int ctrlPointIndex = mesh->GetPolygonVertex( i, j );
 			FbxVector4 point = mesh->GetControlPointAt( ctrlPointIndex );
 
-			//Add it to the list
-			/*pointList.push_back(static_cast<float>(point.mData[0]));
-			pointList.push_back(static_cast<float>(point.mData[1]));
-			pointList.push_back(static_cast<float>(point.mData[2]));*/
-
 			for (int v = 0; v < 3; v++)
 				pointList[i * 3 * 3 + j * 3 + v] = static_cast<float>(point.mData[v]);
 		}
