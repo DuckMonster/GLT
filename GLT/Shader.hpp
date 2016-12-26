@@ -17,7 +17,7 @@ namespace glt {
 
 		//-------------
 
-		Shader( ) {};
+		Shader( ) { };
 		~Shader( ) { dispose( ); }
 
 		void					dispose( );
@@ -42,9 +42,21 @@ namespace glt {
 		bool					set( const char*, glm::vec2 );
 		bool					set( const char*, glm::vec3 );
 		bool					set( const char*, glm::vec4 );
+		bool					set( const char*, glm::ivec2 );
+		bool					set( const char*, glm::ivec3 );
+		bool					set( const char*, glm::ivec4 );
 		bool					set( const char*, glm::mat2 );
 		bool					set( const char*, glm::mat3 );
 		bool					set( const char*, glm::mat4 );
+
+		bool					set( const char*, float*, size_t );
+		bool					set( const char*, int*, size_t );
+		bool					set( const char*, glm::vec2*, size_t );
+		bool					set( const char*, glm::vec3*, size_t );
+		bool					set( const char*, glm::vec4*, size_t );
+		bool					set( const char*, glm::ivec2*, size_t );
+		bool					set( const char*, glm::ivec3*, size_t );
+		bool					set( const char*, glm::ivec4*, size_t );
 
 	private:
 		static GLuint			activeProgram;

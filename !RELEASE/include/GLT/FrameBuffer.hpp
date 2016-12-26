@@ -7,24 +7,23 @@
 namespace glt {
 	class FrameBuffer {
 	public:
-		static void		release();
+		static void		release( );
 
 		//---------
 
-		FrameBuffer(size_t width, size_t height);
-		~FrameBuffer();	
+		FrameBuffer( glm::ivec2 size );
+		~FrameBuffer( );
 
-		size_t			getWidth() { return width; }
-		size_t			getHeight() { return height; }
+		glm::ivec2		getSize( ) { return size; }
 
-		bool			isComplete();
+		bool			isComplete( );
 
-		const GLuint	getHandle() { return handle; }
+		const GLuint	getHandle( ) { return handle; }
 
-		void			bindTexture(Texture& texture, GLenum attachment);
-		void			bindRenderBuffer(RenderBuffer& renderBuffer, GLenum attachment);
+		void			bindTexture( Texture& texture, GLenum attachment );
+		void			bindRenderBuffer( RenderBuffer& renderBuffer, GLenum attachment );
 
-		void			bind();
+		void			bind( );
 
 	private:
 		static glm::ivec2		clientSize;
@@ -33,12 +32,12 @@ namespace glt {
 		//----------
 
 		GLuint					handle;
-		size_t					width, height;
+		glm::ivec2				size;
 
 		std::vector<GLenum>		colorAttachments;
 
 		//----------
 
-		void					init();
+		void					init( );
 	};
 }

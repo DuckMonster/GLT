@@ -12,7 +12,8 @@ namespace glt {
 		void				dispose( );
 		void				bind( );
 
-		void				bindBufferToAttr(VBO* vbo, GLuint attribute);
+		template<typename T>
+		void				bindBufferToAttr(VBO<T>* vbo, GLuint attribute);
 		void				bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute);
 
 		const GLuint		getHandle( ) { return handle; }
@@ -28,4 +29,9 @@ namespace glt {
 
 		void				init( );
 	};
+}
+
+template<typename T>
+void VAO::bindBufferToAttr( VBO<T>* vbo, GLuint attribute ) {
+	bindBufferToAttr( vbo->getHandle( ), vbo->getDataSize( ), attribute );
 }

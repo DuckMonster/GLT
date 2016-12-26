@@ -29,10 +29,10 @@ namespace glt {
 		void				setNormals( const float*, int );
 
 		VAO*				getVAO( ) { return &vao; }
-		VBO*				getVertexVBO( ) { return &vbo_vertices; }
-		VBO*				getColorVBO( ) { return &vbo_colors; }
-		VBO*				getUvVBO( ) { return &vbo_uvs; }
-		VBO*				getNormalVBO( ) { return &vbo_normals; }
+		VBO<float>*			getVertexVBO( ) { return &vbo_vertices; }
+		VBO<float>*			getColorVBO( ) { return &vbo_colors; }
+		VBO<float>*			getUvVBO( ) { return &vbo_uvs; }
+		VBO<float>*			getNormalVBO( ) { return &vbo_normals; }
 		size_t				getVertexCount( ) { return vertexCount; }
 
 		// Bind all the VBO's to attributes
@@ -49,10 +49,10 @@ namespace glt {
 
 	private:
 		VAO					vao;
-		VBO					vbo_vertices;
-		VBO					vbo_colors;
-		VBO					vbo_uvs;
-		VBO					vbo_normals;
+		VBO<float>			vbo_vertices;
+		VBO<float>			vbo_colors;
+		VBO<float>			vbo_uvs;
+		VBO<float>			vbo_normals;
 
 		std::size_t			vertexCount = 0;
 

@@ -228,6 +228,39 @@ bool Shader::set( const char* name, vec4 value ) {
 	glUniform4f( uniformLocation, value.x, value.y, value.z, value.w );
 	return true;
 }
+bool Shader::set( const char* name, ivec2 value ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform2iv( uniformLocation, 1, glm::value_ptr( value ) );
+	return true;
+}
+bool Shader::set( const char* name, ivec3 value ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform3iv( uniformLocation, 1, glm::value_ptr( value ) );
+	return true;
+}
+bool Shader::set( const char* name, ivec4 value ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform4iv( uniformLocation, 1, glm::value_ptr( value ) );
+	return true;
+}
 
 // MATRICES
 bool Shader::set( const char* name, mat2 value ) {
@@ -261,5 +294,94 @@ bool Shader::set( const char* name, mat4 value ) {
 
 	use( );
 	glUniformMatrix4fv( uniformLocation, 1, false, value_ptr( value ) );
+	return true;
+}
+
+bool glt::Shader::set( const char* name, float* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform1fv( uniformLocation, count, (GLfloat*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, int* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform1iv( uniformLocation, count, (GLint*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, vec2* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform2fv( uniformLocation, count, (GLfloat*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, vec3* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform3fv( uniformLocation, count, (GLfloat*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, vec4* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform4fv( uniformLocation, count, (GLfloat*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, ivec2* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform2iv( uniformLocation, count, (GLint*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, ivec3* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform3iv( uniformLocation, count, (GLint*)value );
+	return true;
+}
+bool glt::Shader::set( const char* name, ivec4* value, size_t count ) {
+	GLuint		uniformLocation = getUniform( name );
+
+	// Error checking
+	if (uniformLocation == -1)
+		return false;
+
+	use( );
+	glUniform4iv( uniformLocation, count, (GLint*)value );
 	return true;
 }

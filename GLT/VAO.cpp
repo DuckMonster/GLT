@@ -32,20 +32,12 @@ void VAO::dispose( ) {
 }
 
 void VAO::bind( ) {
-	// This VAO is already bound
-	if ( current == handle )
-		return;
-
 	// Bind
 	glBindVertexArray( handle );
 	current			= handle;	// Update current VAO
 
 	// Log
 	Logger( LOG_VAO_BIND ) << "VAO " << handle << " bound.\n";
-}
-
-void VAO::bindBufferToAttr(VBO* vbo, GLuint attribute) {
-	bindBufferToAttr( vbo->getHandle( ), vbo->getDataSize( ), attribute );
 }
 
 void VAO::bindBufferToAttr(GLuint vbo, GLuint size, GLuint attribute) {
