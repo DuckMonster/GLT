@@ -56,13 +56,12 @@ void Texture::init( ) {
 	Logger( LOG_TEXTURE_INIT ) << "Texture " << handle << " created.\n";
 }
 
-void Texture::init( GLuint internalFormat, GLenum format, GLenum dataType, size_t width, size_t height ) {
+void Texture::init( GLuint internalFormat, GLenum format, GLenum dataType, glm::ivec2 size ) {
 	init( );
 	bind( );
 
-	glTexImage2D( GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, dataType, NULL );
-	this->width = width;
-	this->height = height;
+	glTexImage2D( GL_TEXTURE_2D, 0, internalFormat, size.x, size.y, 0, format, dataType, NULL );
+	this->size = size;
 }
 
 void Texture::bind( ) { bind( 0 ); }
@@ -96,7 +95,7 @@ void Texture::loadFile( const char* source ) {
 	TimeMark timeMark;
 
 	// Load image
-	unsigned char* image = SOIL_load_image( source, &width, &height, 0, SOIL_LOAD_RGBA );
+	unsigned char* image = SOIL_load_image( source, &size.x, &size.y, 0, SOIL_LOAD_RGBA );
 
 	// Loading failed
 	if (image == NULL) {
@@ -109,7 +108,7 @@ void Texture::loadFile( const char* source ) {
 
 	// Load into openGL
 	bind( );
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
 
 	// Free data
 	SOIL_free_image_data( image );

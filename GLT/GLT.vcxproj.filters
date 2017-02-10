@@ -75,9 +75,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="MeshLoader.cpp">
-      <Filter>Source Files\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="VBO.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
@@ -90,15 +87,15 @@
     <ClCompile Include="glt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.hpp">
-      <Filter>Header Files\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshLoader.hpp">
       <Filter>Header Files\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Transform.hpp">
@@ -148,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="LogLevel.hpp">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="EBO.hpp">
+      <Filter>Header Files\GL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

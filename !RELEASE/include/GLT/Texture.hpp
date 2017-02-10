@@ -1,33 +1,32 @@
 #pragma once
-#include<SOIL\SOIL.h>
-#include<GL\glew.h>
+#include <SOIL\SOIL.h>
+#include <GL\glew.h>
+#include <glm\vec2.hpp>
 
 namespace glt {
 	class FrameBuffer;
 
 	class Texture {
 	public:
-		Texture();
-		Texture(const char* source);
-		~Texture();
+		Texture( );
+		Texture( const char* source );
+		~Texture( );
 
-		void			dispose();
-		void			init();
-		void			init(GLuint internalFormat, GLenum format, GLenum dataType, size_t width, size_t height);
+		void			dispose( );
+		void			init( );
+		void			init( GLuint internalFormat, GLenum format, GLenum dataType, glm::ivec2 size );
 
 		void			bind( );
 		void			bind( unsigned int index );
 
-		int				getWidth() { return width; }
-		int				getHeight() { return height; }
+		glm::ivec2		getSize( ) { return size; }
 
-		void			loadFile(const char* source);
+		void			loadFile( const char* source );
 
-		GLuint			getHandle() { return handle; }
+		GLuint			getHandle( ) { return handle; }
 
 	private:
-		int				width = -1;
-		int				height = -1;
+		glm::ivec2		size;
 
 		GLuint			handle = -1;
 

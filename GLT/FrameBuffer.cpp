@@ -80,7 +80,9 @@ void FrameBuffer::bindTexture( Texture& texture, GLenum attachment ) {
 	glFramebufferTexture2D( GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.getHandle( ), 0 );
 
 	// If this is a color attachment, add it to the color attachment list
-	if (attachment >= GL_COLOR_ATTACHMENT0 && attachment <= GL_COLOR_ATTACHMENT15) {
+	if (attachment >= GL_COLOR_ATTACHMENT0 && attachment <= GL_COLOR_ATTACHMENT15 &&
+		std::find( colorAttachments.begin( ), colorAttachments.end( ), attachment ) == colorAttachments.end( )) {
+
 		colorAttachments.push_back( attachment );
 
 		log << "color attachment " << attachment - GL_COLOR_ATTACHMENT0 << " bound. ( " << colorAttachments.size( ) << " )\n";

@@ -20,7 +20,7 @@ namespace glt {
 
 		void						bind( );
 
-		void						setData( const std::vector<T> );
+		void						setData( const std::vector<T>& );
 		void						setData( const T*, size_t );
 
 		const std::vector<float>	getData( );
@@ -29,7 +29,7 @@ namespace glt {
 		size_t						getDataSize( ) { return dataSize; }
 
 		// Setting (or padding) the vertex count
-		void						setVertexCount( size_t, float );
+		void						setVertexCount( size_t, const T& );
 		size_t						getVertexCount( );
 
 		GLuint						getHandle( ) const { return handle; }
@@ -99,8 +99,8 @@ void VBO<T>::bind( ) {
 }
 
 template<typename T>
-void VBO<T>::setData( const std::vector<T> data ) {
-	setData( &data[0], data.size( ) * sizeof( float ) );
+void VBO<T>::setData( const std::vector<T>& data ) {
+	setData( &data[0], data.size( ) * sizeof( T ) );
 }
 
 template<typename T>
@@ -123,7 +123,7 @@ const std::vector<float> VBO<T>::getData( ) {
 }
 
 template<typename T>
-void VBO<T>::setVertexCount( size_t count, float defValue ) {
+void VBO<T>::setVertexCount( size_t count, const T& defValue ) {
 	size_t		dataCount = count * dataSize;
 
 	// Already the right data size
@@ -138,7 +138,7 @@ void VBO<T>::setVertexCount( size_t count, float defValue ) {
 
 	// Remove data
 	else
-		setData( &data[0], dataCount * sizeof( float ) );
+		setData( &data[0], dataCount * sizeof( T ) );
 }
 
 template<typename T>

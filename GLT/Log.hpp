@@ -13,6 +13,11 @@ namespace glt {
 		const size_t		LOG_VAO_BIND = 0;
 		const size_t		LOG_VAO_ATTR = 1;
 
+		const size_t		LOG_EBO_INIT = 1;
+		const size_t		LOG_EBO_DISPOSE = 1;
+		const size_t		LOG_EBO_BIND = 0;
+		const size_t		LOG_EBO_DATA = 0;
+
 		const size_t		LOG_SHADER_DISPOSE = 1;
 		const size_t		LOG_SHADER_COMPILE = 2;
 		const size_t		LOG_SHADER_BIND = 0;

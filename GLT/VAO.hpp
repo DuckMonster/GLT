@@ -6,6 +6,9 @@
 namespace glt {
 	class VAO {
 	public:
+		static void release( ) { glBindVertexArray( 0 ); }
+
+	public:
 		VAO() { init(); }
 		~VAO() { dispose(); }
 
